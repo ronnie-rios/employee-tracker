@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/ronnie-rios/employee-tracker#readme",
   "dependencies": {
+    "console.table": "^0.10.0",
     "inquirer": "^8.1.0",
-    "jest": "^27.0.4"
+    "jest": "^27.0.4",
+    "mysql2": "^2.2.5"
   }
 }
