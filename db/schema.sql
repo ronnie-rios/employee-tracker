@@ -20,5 +20,4 @@ CREATE TABLE employees(
     last_name VARCHAR(30) NOT NULL,
     role_id INTEGER,
     manager_id INTEGER NOT NULL,
-    C
 );
