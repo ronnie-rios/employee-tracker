@@ -9,18 +9,42 @@ function initialPrompts() {
     inquirer.prompt([
         {
             type: 'list',
-            message: 'Please choose a following option',
+            message: 'Please choose an option',
             name: 'options',
             choices: [
             'View all departments',
             'View all roles',
             'View all employees',
-            'Add department',
-            'Add role',
-            'Add Employee' ,
+            'Add a department',
+            'Add a role',
+            'Add an employee' ,
             'Update emplyoee']
         }
-    ]).then
+    ]).then((start) => {
+        switch(start.options) {
+            case 'View all departments':
+                viewDepartments();
+                break;
+            case 'View all roles':
+                viewRoles();
+                break;
+            case 'View all employees':
+                viewEmployees();
+                break;
+            case "Add a department":
+                addDepartment();
+                break;
+            case "Add a role":
+                addRole();
+                break;
+            case "Add an employee":
+                addEmployee();
+                break;
+            case "Update employee":
+                updateEmployee();
+                break;
+        }
+    })
 }
 
 function viewDepartments(){
