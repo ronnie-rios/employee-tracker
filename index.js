@@ -83,3 +83,5 @@ function addEmployee(){
 function updateEmployee(){
 
 };
+//to start prompts
+initialPrompts();
