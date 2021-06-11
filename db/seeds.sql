@@ -1,11 +1,11 @@
-CREATE TABLE departments (name)
+INSERT INTO departments (name)
 VALUES
     ('Sales'),
     ('Accounting'),
     ('Reception'),
     ('Customer Service');
 
-CREATE TABLE roles (title, salary, department_id)
+INSERT INTO roles (title, salary, department_id)
 VALUES
     ('Sales Lead', 75000, 01),
     ('Sales Person', 55000, 02),
@@ -14,7 +14,7 @@ VALUES
     ('Quality Control', 50000, 05),
     ('Customer Consultant', 45000, 06),
 
-CREATE TABLE employees (first_name, last_name, role_id, manager_id)
+INSERT INTO employees (first_name, last_name, role_id, manager_id)
 VALUES 
     ('Michael', 'Scott', 1, 001),
     ('Jim', 'Halpert', 1, 002),
