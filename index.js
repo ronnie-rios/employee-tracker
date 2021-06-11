@@ -6,7 +6,7 @@ const cTable = require('console.table');
 const port = process.env.PORT || 3001;
 
 function initialPrompts() {
-    inquirer.createPromptModule([
+    inquirer.prompt([
         {
             type: 'list',
             message: 'Please choose a following option',
