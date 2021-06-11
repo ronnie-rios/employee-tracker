@@ -20,8 +20,8 @@ function initialPrompts() {
             'Add an employee' ,
             'Update emplyoee']
         }
-    ]).then((start) => {
-        switch(start.options) {
+    ]).then((result) => {
+        switch(result.options) {
             case 'View all departments':
                 viewDepartments();
                 break;
@@ -42,13 +42,21 @@ function initialPrompts() {
                 break;
             case "Update employee":
                 updateEmployee();
-                break;
+                break; 
         }
     })
 }
 
 function viewDepartments(){
+    const sql = 'SELECT * FROM departments';
 
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+            return;
+        } console.table(result);
+    });
+    initialPrompts();
 };
 
 function viewRoles(){
