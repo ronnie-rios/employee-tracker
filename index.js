@@ -48,7 +48,7 @@ function initialPrompts() {
 }
 
 function viewDepartments(){
-    const sql = 'SELECT * FROM departments';
+    const sql = `SELECT * FROM departments`;
 
     db.query(sql, (err, result) => {
         if (err) {
