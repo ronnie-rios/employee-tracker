@@ -60,8 +60,17 @@ function viewDepartments(){
 };
 
 function viewRoles(){
-
-};
+    const sql = `SELECT roles.id, roles.title, roles.salary, departments.name FROM roles
+                INNER JOIN departments
+                ON departments.id = roles.id`;
+    db.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+            return;
+        } console.table(result);
+    });
+    initialPrompts();   
+}; 
 
 function viewEmployees(){
 
