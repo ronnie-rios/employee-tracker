@@ -89,8 +89,23 @@ function viewEmployees(){
 };
 
 
-function addDepartment(){
+async function addDepartment(){
+    let response = await inquirer.prompt([{
+        type: 'input',
+        name: 'departments',
+        message: 'Please enter department name'
+        },
+    ])
+    const sql = `INSERT INTO departments (name) VALUES (?)`;
+    const params = [response.departments];
 
+    db.query(sql, params, (err, result) => {
+        if (err) {
+            console.log(err);
+            return;
+        } console.log('New Department added')
+    });
+    initialPrompts();
 };
 
 function addRole(){
