@@ -18,7 +18,7 @@ function initialPrompts() {
             'Add a department',
             'Add a role',
             'Add an employee' ,
-            'Update emplyoee']
+            'Update employee']
         }
     ]).then((result) => {
         switch(result.options) {
@@ -103,36 +103,42 @@ async function addDepartment(){
         if (err) {
             console.log(err);
             return;
-        } console.log('New Department added')
+        } console.log('New Department added');
+        
     });
     initialPrompts();
 };
 
-async function addRole(){
-    let response = await inquirer.prompt([
-        {
-            type: 'input',
-            name: 'roles',
-            message: 'Please enter a role'
-        },
-        {
-            type: 'input',
-            name: 'salary',
-            message: 'Please enter the salary.'
-        },
-        {
-            type: 'input',
-            name: 'department',
-            message: 'Please enter the department'
-        }
-    ])
-    let rolesArr = [];
+// async function addRole(){
+//     let response = await inquirer.prompt([
+//         {
+//             type: 'input',
+//             name: 'roles',
+//             message: 'Please enter a role'
+//         },
+//         {
+//             type: 'input',
+//             name: 'salary',
+//             message: 'Please enter the salary.'
+//         },
+//         {
+//             type: 'input',
+//             name: 'department',
+//             message: 'Please enter the department'
+//         }
+//     ])
+//     let rolesArr = [];
+//     const sql = `INSER INTO role (title, salary, departments_id)
+//                  VALUES(?, ?, ?)`;
+//      const parmas = [response.roles, repsonse. salary, response.department]
 
-
-    db.query(sql, response, (err, results) => {
-
-    })
-};
+//     db.query(sql, response, (err, results) => {
+//      if (err) {
+//          console.log(err);
+//              return;
+//           } console.log('role added')
+//     })
+// };
 
 async function addEmployee(){
     let response = await inquirer.prompt([
@@ -170,9 +176,46 @@ async function addEmployee(){
     });
     initialPrompts();
 };
+async function getEmployees() {
+    let employeeSql = `SELECT CONCAT(first_name, ' ', last_name) AS name, id AS value FROM employees`;
+    db.query(employeeSql, (err, result) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        let employeeOptions = JSON.parse.JSON.stringify(result);
+        return employeeOptions;
+    })
+}
+async function updateEmployee(){
+    const employeeArr = await getEmployees();
 
-function updateEmployee(){
+    let response = await inquirer.prompt([
+        {
+            type: 'list',
+            name: 'employeeOptions',
+            message: 'Choose an employee to update their information',
+            choices: [employeeArr]
+        },
+        {
+            type: 'list',
+            name: 'updatedRole',
+            message: 'Choose their new role',
+            choices: ['Sales Team', 'Accountant', 'Receptionist', 'Quality Control']
+        }
+    ]);
+    const sql = `UPDATE employees SET roles_id = ?
+                WHERE id = ?`;
+    const params = [response.empployeeOptions, response.updatedRole];
 
+    db.query(sql, params, (err, results) => {
+        if (err) {
+            console.log(err);
+            return;
+        } 
+        console.log('Employee info updated')
+    });
+    initialPrompts();
 };
 //to start prompts
 initialPrompts();
