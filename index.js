@@ -108,12 +108,67 @@ async function addDepartment(){
     initialPrompts();
 };
 
-function addRole(){
+async function addRole(){
+    let response = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'roles',
+            message: 'Please enter a role'
+        },
+        {
+            type: 'input',
+            name: 'salary',
+            message: 'Please enter the salary.'
+        },
+        {
+            type: 'input',
+            name: 'department',
+            message: 'Please enter the department'
+        }
+    ])
+    let rolesArr = [];
 
+
+    db.query(sql, response, (err, results) => {
+
+    })
 };
 
-function addEmployee(){
+async function addEmployee(){
+    let response = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'firstName',
+            message: 'Please enter their first name',
+        },
+        {
+            type: 'input',
+            name: 'lastName',
+            message: 'Please enter their last name'
+        },
+        {
+            type: 'input',
+            name: 'role',
+            message: 'Please enter their role'
+        },
+        {
+            type: 'input',
+            name: 'manager',
+            message: 'Please enter their manager id.'
+        }
+    ]);
+    const sql = `INSERT INTO employees (first_name, last_name, roles_id, manager_id)
+                    VALUES (?, ?, ?, ?)`;
+    const params = [response.firstName, response.lastName, response.role, response.manager]
 
+    db.query(sql, params, (err, result) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log('employee was added');
+    });
+    initialPrompts();
 };
 
 function updateEmployee(){
