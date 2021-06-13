@@ -176,26 +176,26 @@ async function addEmployee(){
     });
     initialPrompts();
 };
-async function getEmployees() {
-    let employeeSql = `SELECT CONCAT(first_name, ' ', last_name) AS name, id AS value FROM employees`;
-    db.query(employeeSql, (err, result) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-        let employeeOptions = JSON.parse.JSON.stringify(result);
-        return employeeOptions;
-    })
-}
+// async function getEmployees() {
+//     let employeeSql = `SELECT CONCAT(first_name, ' ', last_name) AS name, id AS value FROM employees`;
+//     db.query(employeeSql, (err, result) => {
+//         if (err) {
+//             console.log(err);
+//             return;
+//         }
+//         let employeeOptions = JSON.parse.JSON.stringify(result);
+//         return employeeOptions;
+//     })
+// }
 async function updateEmployee(){
-    const employeeArr = await getEmployees();
-
+    const employeeList = `SELECT FROM * employees`
+    
     let response = await inquirer.prompt([
         {
             type: 'list',
             name: 'employeeOptions',
             message: 'Choose an employee to update their information',
-            choices: [employeeArr]
+            choices: [employeeList]
         },
         {
             type: 'list',
